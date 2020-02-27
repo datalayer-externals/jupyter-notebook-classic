@@ -2,7 +2,7 @@
 """
 
 import os.path
-from nbclassic.shimconfig import shim_configs
+from nbclassic.shimconfig import merge_notebook_configs
 
 test_conf_dir = os.path.join(os.getcwd(), 'tests', 'confs')
 os.chdir(test_conf_dir)
@@ -10,10 +10,10 @@ os.chdir(test_conf_dir)
 def test_none():
     """Test None parameters support.
     """
-    merged = shim_configs(
+    merged = merge_notebook_configs(
         notebook_config_name = None, 
         server_config_name = None, 
-        extension_config_name = None, 
+        other_config_name = None, 
         argv = []
         )
     assert merged.NotebookApp != None
@@ -24,10 +24,10 @@ def test_merge():
     """Test NotebookApp are copied to ServerApp.
     """
 
-    merged = shim_configs(
+    merged = merge_notebook_configs(
         notebook_config_name = 'jupyter_notebook', 
         server_config_name = 'jupyter_nbclassic', 
-        extension_config_name = 'jupyter_my_ext', 
+        other_config_name = 'jupyter_my_ext', 
         argv = []
         )
 
@@ -46,10 +46,10 @@ def test_merge_cli_order():
     and CLI flags are processed.
     """
 
-    merged = shim_configs(
+    merged = merge_notebook_configs(
         notebook_config_name = 'jupyter_notebook', 
         server_config_name = 'jupyter_nbclassic', 
-        extension_config_name = 'jupyter_my_ext', 
+        other_config_name = 'jupyter_my_ext', 
         argv = [
             '--NotebookApp.port=1111', 
             ]
@@ -70,10 +70,10 @@ def test_merge_cli_order():
     and CLI flags are processed in correct order.
     """
 
-    merged = shim_configs(
+    merged = merge_notebook_configs(
         notebook_config_name = 'jupyter_notebook', 
         server_config_name = 'jupyter_nbclassic', 
-        extension_config_name = 'jupyter_my_ext', 
+        other_config_name = 'jupyter_my_ext', 
         argv = [
             '--NotebookApp.port=1111', 
             '--ServerApp.port=2222', 

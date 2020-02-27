@@ -61,7 +61,7 @@ setup(
     platforms="Linux, Mac OS X, Windows",
     packages=setuptools.find_packages(),
     install_requires=[
-        'jupyter_server',
+        'jupyter_server@ git+https://github.com/datalayer-contrib/jupyter-server.git@extension_handlers',
         'notebook<7',
     ],
     classifiers=[
